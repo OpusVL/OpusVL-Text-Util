@@ -34,6 +34,14 @@ This provides a couple of simple methods for playing with text.
 
 =head2 truncate_text
 
+This truncates a string close to the limit provided. It tries to
+break it on a word break if possible.  It then appends a '...' to
+the string.  This isn't included in the calculation of the length,
+so you may end up with 3 more characters than you specified.
+
+    my $truncated = truncate_text('a long string really', 10);
+    # 'a long...'
+
 =cut
 
 sub truncate_text 
@@ -44,7 +52,7 @@ sub truncate_text
     return $string if length($string) < $length;
     if($string =~ /^(.{0,$length}\w\b)/)
     {
-        return $1 . ' ...';
+        return $1 . '...';
     }
     else
     {
