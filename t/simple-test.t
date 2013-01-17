@@ -11,4 +11,5 @@ is wrap_text('a long string really', 10), "a long\nstring\nreally", 'Pod example
 is wrap_text('a long string really', 10, "\r\n"), "a long\r\nstring\r\nreally", 'Pod example';
 is wrap_text('awkwardnopunctuationnospaces', 10), 'awkwardnopunctuationnospaces';
 is wrap_text("a longstringawkwardonereally", 10), "a\nlongstringawkwardonereally", "Boundary check";
+is wrap_text('short one', 10), 'short one';
 done_testing;
