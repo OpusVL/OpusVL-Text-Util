@@ -12,4 +12,11 @@ is wrap_text('a long string really', 10, "\r\n"), "a long\r\nstring\r\nreally", 
 is wrap_text('awkwardnopunctuationnospaces', 10), 'awkwardnopunctuationnospaces';
 is wrap_text("a longstringawkwardonereally", 10), "a\nlongstringawkwardonereally", "Boundary check";
 is wrap_text('short one', 10), 'short one';
+
+# these tests are meaningless, it doesn't really do a proper
+# job with multiline strings.
+is wrap_text("short one\nmult line\nwith some wrapping needed", 10), "short one\nmult line\nwith some\nwrapping\nneeded";
+is wrap_text("short one\r\nmult line\r\nwith some wrapping needed", 10, "\r\n"), "short one\r\nmult line\r\nwith some\r\nwrapping\r\nneeded";
+
+
 done_testing;

@@ -64,6 +64,14 @@ sub truncate_text
 
 =head2 wrap_text
 
+This method has a go at wrapping a line of text.  Note that it
+isn't designed to work on multiple lines of text.  It will attempt
+to split at convenient points within the required width and if
+that fails it will simply display what is there.  All the text
+should be displayed with this method.
+
+You can also specify the linefeed characters as the last parameter.
+
     my $wrapped = wrap_text('a long string really', 10);
     # "a long\nstring\nreally"
     my $wrapped = wrap_text('a long string really', 10, "\r\n");
