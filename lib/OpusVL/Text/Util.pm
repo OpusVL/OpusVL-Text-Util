@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 our @ISA = qw/Exporter/;
-our @EXPORT_OK = qw/truncate_text/;
+our @EXPORT_OK = qw/truncate_text wrap_text/;
 
 
 =head1 NAME
@@ -25,10 +25,12 @@ our $VERSION = '0.02';
 
 This provides a couple of simple methods for playing with text.
 
-    use OpusVL::Text::Util qw/truncate_text/;
+    use OpusVL::Text::Util qw/truncate_text wrap_text/;
 
     my $truncated = truncate_text('a long string really', 10);
     # 'a long...'
+    my $wrapped = truncate_text('a long string really', 10);
+    $wrapped = "a long\nstring really";
 
 =head1 EXPORT
 
@@ -58,6 +60,26 @@ sub truncate_text
     {
         return substr $string, 0, $length;
     }
+}
+
+=head2 wrap_text
+
+    my $wrapped = wrap_text('a long string really', 10);
+    # "a long\nstring\nreally"
+    my $wrapped = wrap_text('a long string really', 10, "\r\n");
+    # "a long\r\nstring\r\nreally"
+
+=cut
+
+sub wrap_text
+{
+    my $string = shift;
+    my $length = shift;
+    my $separator = shift || "\n";
+
+    return $string if length($string) < $length;
+    my @lines = $string =~ /\G(.{0,$length}\w\b|.*\w\b)\s*/g;
+    return join $separator, @lines;
 }
 
 =head1 AUTHOR
