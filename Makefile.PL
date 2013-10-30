@@ -7,6 +7,8 @@ license  'opusvl';
 
 build_requires 'Test::More';
 
+requires 'Array::Utils';
+
 auto_install;
 
 WriteAll;
