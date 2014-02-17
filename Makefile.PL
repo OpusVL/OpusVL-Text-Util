@@ -10,6 +10,13 @@ build_requires 'Test::More';
 requires 'Array::Utils';
 
 auto_install;
+resources (
+    repository => {
+        url => 'ssh://git/srv/git/OpusVL-Text-Util',
+        type => 'git',
+    },
+);
+
 
 WriteAll;
 
