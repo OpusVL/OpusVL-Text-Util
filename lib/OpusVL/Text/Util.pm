@@ -12,7 +12,7 @@ use Scalar::Util qw/looks_like_number/;
 
 # ABSTRACT: Simple text utilities
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 
 =head1 SYNOPSIS
