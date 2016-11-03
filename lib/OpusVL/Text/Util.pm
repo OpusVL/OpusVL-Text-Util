@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 our @ISA = qw/Exporter/;
-our @EXPORT_OK = qw/truncate_text wrap_text string_to_id missing_array_items not_blank split_words line_split/;
+our @EXPORT_OK = qw/truncate_text wrap_text string_to_id missing_array_items not_blank split_words line_split mask_text/;
 
 use Array::Utils qw/intersect array_minus/;
 use Scalar::Util qw/looks_like_number/;
@@ -180,6 +180,67 @@ sub split_words
     return split /[\s,]+/, $value;
 }
 
+=head2 mask_text
+
+Mask text field contents using a simple regex.
+
+    mask_text('*', '(\d{4}).*(\d{3})', '456456564654654');
+    # '4564********654'
+
+Specify a fill character, a regex (as a string), and the text to mask out.
+
+This does not guard against rogue regexes.  Capture the parts you expect to
+be retained.
+
+=cut
+
+sub mask_text
+{
+    my ($fill_char, $regex, $text) = @_;
+
+    # fudge the regex.
+    my @values = $text =~ /$regex/;
+    unless(@values)
+    {
+        return $fill_char x length($text);
+    }
+    my @chars;
+    my $group = 1;
+    my $group_inserted = 0;
+    my $start = $-[$group];
+    my $end = $+[$group];
+    for (my $i = 0; $i < length($text); $i++)
+    {
+        if($i > $end)
+        {
+            $group++;
+            $group_inserted = 0;
+            if($group > scalar @values)
+            {
+                $start = length($text) + 1;
+                $end = $start +1;
+            }
+            else
+            {
+                $start = $-[$group];
+                $end = $+[$group];
+            }
+        }
+        if($i >= $start && $i < $end)
+        {
+            unless($group_inserted)
+            {
+                $group_inserted = 1;
+                push @chars, $values[$group-1];
+            }
+        }
+        else
+        {
+            push @chars, $fill_char;
+        }
+    }
+    return join '', @chars;
+}
 
 =head1 AUTHOR
 
