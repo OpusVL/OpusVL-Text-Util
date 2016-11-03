@@ -1,6 +1,6 @@
 package OpusVL::Text::Util;
 
-use 5.006;
+use 5.010;
 use strict;
 use warnings;
 
@@ -10,9 +10,7 @@ our @EXPORT_OK = qw/truncate_text wrap_text string_to_id missing_array_items not
 use Array::Utils qw/intersect array_minus/;
 use Scalar::Util qw/looks_like_number/;
 
-=head1 NAME
-
-OpusVL::Text::Util - Simple text utilities
+# ABSTRACT: Simple text utilities
 
 =head1 VERSION
 
