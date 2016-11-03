@@ -12,13 +12,7 @@ use Scalar::Util qw/looks_like_number/;
 
 # ABSTRACT: Simple text utilities
 
-=head1 VERSION
-
-Version 0.05
-
-=cut
-
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 
 =head1 SYNOPSIS
@@ -240,18 +234,5 @@ sub mask_text
     return join '', @chars;
 }
 
-=head1 AUTHOR
-
-OpusVL, C<< <colin at opusvl.com> >>
-
-
-=head1 LICENSE AND COPYRIGHT
-
-Copyright 2012 OpusVL.
-
-This software is licensed according to the "IP Assignment Schedule" provided with the development project.
-
-
-=cut
 
 1; # End of OpusVL::Text::Util
