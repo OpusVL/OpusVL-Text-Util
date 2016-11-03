@@ -2,6 +2,8 @@ Revision history for OpusVL-Text-Util
 
 {{ $NEXT }}
 
+0.06      2016-11-03 16:11:49+00:00 Europe/London
+
         Added mask_text function.
         Converted to Dist::Zilla for distribution.
         Open Sourced.
