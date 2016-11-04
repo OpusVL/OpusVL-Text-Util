@@ -6,4 +6,11 @@ is mask_text('*', '.(\d{4}).*(\d{3}).', '456456564654654'), '*5645******465*', '
 
 is mask_text('*', '(\d{4}).*(\d{3})', 'rabbits'), '*******', 'fail secure';
 
+my $multiline = << "DONE";
+A multi line value.
+Works fine.
+DONE
+
+is mask_text('*', '(.*)', $multiline), $multiline, 'Should be able to deal with multi-line values';
+
 done_testing;

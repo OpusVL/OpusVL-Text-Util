@@ -191,7 +191,7 @@ sub mask_text
     my ($fill_char, $regex, $text) = @_;
 
     # fudge the regex.
-    my @values = $text =~ /$regex/;
+    my @values = $text =~ /$regex/s;
     unless(@values)
     {
         return $fill_char x length($text);
