@@ -5,6 +5,7 @@ is mask_text('*', '(\d{4}).*(\d{3})', '456456564654654'), '4564********654', 'Ma
 is mask_text('*', '.(\d{4}).*(\d{3}).', '456456564654654'), '*5645******465*', 'Mask card';
 
 is mask_text('*', '(\d{4}).*(\d{3})', 'rabbits'), '*******', 'fail secure';
+is mask_text('*', '(.*)', 'rabbits'), 'rabbits', 'No op';
 
 my $multiline = << "DONE";
 A multi line value.
