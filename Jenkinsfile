@@ -1,4 +1,9 @@
 node {
+   stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+	  checkout scm
+   }
+
    stage('Build') {
       sh "echo ${env.GIT_URL}"
       sh "/opt/perl5/bin/cpanm -M http://cpan.opusvl.com --installdeps ."
