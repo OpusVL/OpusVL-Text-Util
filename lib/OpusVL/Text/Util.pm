@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 our @ISA = qw/Exporter/;
-our @EXPORT_OK = qw/truncate_text wrap_text string_to_id missing_array_items not_blank split_words line_split mask_text/;
+our @EXPORT_OK = qw/truncate_text wrap_text string_to_id missing_array_items not_blank split_words line_split mask_text split_camel_case/;
 
 use Array::Utils qw/intersect array_minus/;
 use Scalar::Util qw/looks_like_number/;
@@ -234,5 +234,22 @@ sub mask_text
     return join '', @chars;
 }
 
+=head2 split_camel_case
+
+Split a camel case word into an arrayref.  This assumes you're giving it a word,
+behaviour when passed something like a sentence is undefined.
+
+    split_camel_case('TemplateNotMatchedException')
+    # ['Template', 'Not', 'Matched', 'Exception']
+
+=cut
+
+sub split_camel_case
+{
+    my $text = shift;
+    # a lot of the credit for this goes to the Perl Monks.
+    my @parts = $text =~ /[A-Z0-9](?:[A-Z0-9]+|[^A-Z0-9]*)(?=$|[A-Z0-9])/g;
+    return \@parts;
+}
 
 1; # End of OpusVL::Text::Util
