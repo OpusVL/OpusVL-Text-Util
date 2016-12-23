@@ -2,6 +2,11 @@ Revision history for OpusVL-Text-Util
 
 {{ $NEXT }}
 
+0.10      2016-12-23 08:51:11+00:00 Europe/London
+
+        Added new camelcase split function
+        Add Jenkins file to do local Jenkins testing.
+
 0.09      2016-11-04 12:04:08+00:00 Europe/London
 
         Deal with multiline text in the mask function.
